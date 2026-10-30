@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/components/Verbs.jsx"
+        ],
+        "createdAt": "2026-10-30T09:00:33.405Z",
+        "reason": "Codex: the custom Img component resolves this image name through src/components/Img.jsx and scripts/optimise-images.mjs; the generated responsive files exist."
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/components/ChapterBar.jsx"
+        ],
+        "createdAt": "2026-10-30T09:19:54.625Z",
+        "reason": "Codex: the custom Img component resolves the logo through Img.jsx and the generated logo-800.webp/logo-1600.webp files exist."
+      },
+      {
+        "rule": "broken-image",
+        "value": "*",
+        "files": [
+          "src/components/Gallery.jsx"
+        ],
+        "createdAt": "2026-10-30T09:19:55.137Z",
+        "reason": "Codex: each custom Img name in the triptych has a SIZES entry and generated responsive WebP files under public/img."
+      }
+    ]
+  }
+}

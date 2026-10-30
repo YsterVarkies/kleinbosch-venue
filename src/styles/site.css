@@ -1,0 +1,1373 @@
+/* Kleinbosch Venue — "The place carries it": tobacco and olive, Bebas Neue over EB Garamond. */
+
+:root{
+  --deep: #472913;
+  --surface: #55321a;
+  --bone: #e4e0cf;
+  --ink-dark: #2b170a;
+  --muted: #b39f84;
+  --muted-dark: #5e4632;
+  --accent: #525e1b;
+  --accent-hover: #3e4812;
+  --accent-ink: #e4e0cf;
+  --field-1: #c79a3e;
+  --field-2: #525e1b;
+  --display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --text: 'EB Garamond', Georgia, serif;
+  /* The five sizes on the page. */
+  --step-small: clamp(0.875rem, 0.84rem + 0.1vw, 0.9375rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2.75rem, 1.4rem + 5.4vw, 6.5rem);
+  --step-display: clamp(5.5rem, 2rem + 13vw, 15rem);
+  --margin: 20px;
+  --radius: 12px;
+  --gap-section: 120px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (min-width: 900px){
+  :root{
+    --margin: 5vw;
+    --gap-section: 160px;
+  }
+}
+
+*, *::before, *::after{
+  box-sizing: border-box;
+}
+
+html{
+  -webkit-text-size-adjust: 100%;
+}
+
+body{
+  margin: 0;
+  background: var(--deep);
+  color: var(--bone);
+  font-family: var(--text);
+  font-size: var(--step-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+img{
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a{
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+}
+
+button{
+  font: inherit;
+  color: inherit;
+}
+
+h1, h2, h3{
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.88;
+}
+
+p{
+  margin: 0;
+}
+
+figure{
+  margin: 0;
+}
+
+::selection{
+  background: var(--field-1);
+  color: var(--ink-dark);
+}
+
+:focus-visible{
+  outline: 3px solid var(--field-1);
+  outline-offset: 3px;
+}
+
+.visually-hidden{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link{
+  position: fixed;
+  left: 12px;
+  top: -80px;
+  z-index: 100;
+  padding: 12px 16px;
+  background: var(--bone);
+  color: var(--ink-dark);
+}
+
+.skip-link:focus{
+  top: 12px;
+}
+
+/* Buttons and links: one shape, square, one fill. */
+
+.button{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 26px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: var(--step-body);
+  font-weight: 500;
+  text-decoration: none;
+  border: 0;
+  cursor: pointer;
+  transition: background-color 0.25s var(--ease), transform 0.2s var(--ease);
+}
+
+.button:hover{
+  background: var(--accent-hover);
+}
+
+.button:active{
+  transform: scale(0.97);
+}
+
+.button-wide{
+  width: 100%;
+  min-height: 56px;
+}
+
+.text-link{
+  text-decoration: underline;
+  transition: opacity 0.2s;
+}
+
+.visit-write{
+  margin-bottom: 10px;
+}
+
+.text-link:hover{
+  opacity: 0.7;
+}
+
+/* Split text (React Bits) */
+
+.split{
+  display: inline-block;
+}
+
+.split-mask{
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-top: 0.06em;
+  margin-top: -0.06em;
+}
+
+.split-part{
+  display: inline-block;
+  will-change: transform;
+}
+
+/* The page slides away to uncover the footer. */
+
+.page{
+  position: relative;
+  z-index: 1;
+  background: var(--deep);
+}
+
+/* ---------- Hero: the venue photograph ---------- */
+
+.hero{
+  height: 100svh;
+  min-height: 640px;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(0, 1fr);
+  background: var(--deep);
+}
+
+.hero-panel{
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  background: #dcdccb;
+}
+
+.hero-view{
+  position: absolute;
+  inset: 0;
+}
+
+.hero-photo{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-view::after{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(43, 23, 10, 0.34);
+}
+
+.hero-place{
+  position: absolute;
+  top: 92px;
+  left: 28px;
+  z-index: 2;
+  color: var(--ink-dark);
+  font-size: var(--step-small);
+  background: var(--bone);
+  padding: 4px 10px;
+}
+
+.hero-title{
+  position: absolute;
+  z-index: 2;
+  top: 15%;
+  left: 0;
+  right: 0;
+  padding: 0 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-title h1{
+  font-size: min(var(--step-display), 21svh);
+  color: var(--bone);
+  letter-spacing: -0.02em;
+  line-height: 0.84;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.hero-lead{
+  margin-top: 32px;
+  max-width: 36ch;
+  font-size: var(--step-lead);
+  line-height: 1.3;
+  color: var(--ink-dark);
+  background: var(--bone);
+  padding: 10px 18px;
+}
+
+/* ---------- The chapter bar ---------- */
+
+.chapter-bar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 80px;
+  padding: 0 var(--margin);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bone);
+  color: var(--ink-dark);
+  font-family: var(--display);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.chapter-bar[data-on='bone']{
+  background: var(--bone);
+  color: var(--ink-dark);
+}
+
+.chapter-bar[data-on='hero']{
+  background: transparent;
+  color: var(--bone);
+}
+
+.chapter-bar[data-on='field-1']{
+  background: var(--field-1);
+  color: var(--ink-dark);
+}
+
+.chapter-bar[data-on='field-2']{
+  background: var(--field-2);
+  color: var(--bone);
+}
+
+.chapter-bar[data-on='surface']{
+  background: var(--surface);
+  color: var(--bone);
+}
+
+.chapter-bar[data-on='deep']{
+  background: var(--deep);
+  color: var(--bone);
+}
+
+.chapter-brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+  flex: none;
+}
+
+.chapter-logo{
+  display: block;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+}
+
+.chapter-brand-name{
+  font-family: var(--display);
+  font-size: 1.65rem;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.chapter-links{
+  display: flex;
+  align-items: center;
+  gap: clamp(14px, 2vw, 32px);
+}
+
+.chapter-menu-toggle{
+  display: none;
+}
+
+.chapter-links a{
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 25px;
+  text-decoration: none;
+}
+
+.chapter-links a::after{
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  left: 0;
+  height: 1px;
+  content: '';
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease);
+}
+
+.chapter-links a:hover::after, .chapter-links a:focus-visible::after{
+  transform: scaleX(1);
+}
+
+.chapter-cta:hover{
+  text-decoration: underline;
+}
+
+.chapter-cta{
+  font-size: 25px;
+}
+
+/* ---------- Chapters share a 12-column grid with equal margins ---------- */
+
+.chapter{
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: 20px;
+  padding: var(--gap-section) var(--margin);
+  scroll-margin-top: 80px;
+}
+
+.visit{
+  scroll-margin-top: 80px;
+}
+
+/* Intro: the name, explained, in the right half */
+
+.intro{
+  background: var(--bone);
+  color: var(--ink-dark);
+  row-gap: 0;
+}
+
+.intro-heading{
+  grid-column: 1 / 7;
+  grid-row: 1;
+  font-size: var(--step-head);
+  max-width: 7.5em;
+}
+
+.intro-text{
+  grid-column: 7 / 13;
+  grid-row: 1 / 3;
+  align-self: start;
+  margin-top: 18vh;
+}
+
+.intro-statement{
+  font-size: clamp(1.5rem, 0.9rem + 1.5vw, 2.125rem);
+  line-height: 1.25;
+  text-indent: 3em;
+}
+
+.intro-body{
+  margin-top: 28px;
+  max-width: 46ch;
+}
+
+.intro-figure{
+  grid-column: 1 / 4;
+  grid-row: 3;
+  margin-top: -6vw;
+}
+
+.intro-figure img{
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.intro-note{
+  grid-column: 1 / 4;
+  grid-row: 4;
+  margin-top: 64px;
+  max-width: 26ch;
+  font-size: var(--step-body);
+  color: var(--muted-dark);
+}
+
+/* Seasons: a band of unequal paintings */
+
+.seasons{
+  background: var(--field-1);
+  color: var(--ink-dark);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.seasons-heading{
+  grid-column: 3 / 13;
+  font-size: var(--step-head);
+  margin-bottom: 64px;
+}
+
+.band{
+  grid-column: 1 / -1;
+  display: flex;
+  height: 68svh;
+  min-height: 420px;
+}
+
+.band-panel{
+  position: relative;
+  flex: 2 1 0;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  overflow: hidden;
+  background: var(--deep);
+  transition: flex-grow 0.5s var(--ease);
+}
+
+.band-panel:nth-child(1){
+  flex-grow: 5;
+}
+
+.band-panel:nth-child(3){
+  flex-grow: 3;
+}
+
+.band-panel:hover, .band-panel:focus-visible{
+  flex-grow: 6;
+}
+
+.band-panel img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+
+.band-panel:hover img{
+  transform: scale(1.04);
+}
+
+.band-title, .band-label{
+  position: absolute;
+  left: 24px;
+  z-index: 1;
+  color: var(--bone);
+  text-align: left;
+  background: rgba(20, 14, 8, 0.62);
+  padding: 8px 12px;
+}
+
+.band-title{
+  top: 24px;
+  max-width: 12em;
+  font-size: var(--step-lead);
+  line-height: 1.15;
+}
+
+.band-label{
+  bottom: 24px;
+  font-size: var(--step-small);
+  white-space: nowrap;
+}
+
+.band-label strong{
+  font-weight: 500;
+  margin-right: 6px;
+}
+
+.band-caption{
+  grid-column: 1 / 8;
+  padding: 24px var(--margin) 0;
+  font-size: var(--step-body);
+  max-width: 60ch;
+}
+
+/* Occasions: an image-led introduction beside a grouped event list */
+
+.occasions{
+  background: var(--field-2);
+  color: var(--bone);
+}
+
+.occasions-layout{
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(48px, 8vw, 128px);
+  align-items: start;
+}
+
+.occasions-heading{
+  font-size: var(--step-head);
+  max-width: 8em;
+}
+
+.occasions-heading span{
+  display: block;
+}
+
+.occasions-intro > p{
+  margin-top: 28px;
+  max-width: 35ch;
+  font-size: var(--step-lead);
+  line-height: 1.35;
+}
+
+.occasions-figure{
+  width: min(100%, 410px);
+  margin-top: 48px;
+}
+
+.occasions-figure img{
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.occasions-list{
+  display: grid;
+  gap: 38px;
+  padding-top: 8px;
+}
+
+.occasion-group{
+  display: grid;
+  grid-template-columns: minmax(110px, 0.65fr) minmax(0, 1.35fr);
+  gap: 20px;
+}
+
+.occasion-group h3{
+  font-family: var(--text);
+  font-size: var(--step-lead);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.occasion-group ul{
+  list-style: none;
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+.occasion-group li{
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 16px;
+}
+
+.occasion-when{
+  color: #cfd2ae;
+  text-align: right;
+}
+
+/* Verbs: one word holds the middle while its photograph passes */
+
+.verbs{
+  background: var(--deep);
+}
+
+/* The verb starts in the middle of the screen, holds there while its image passes, and is
+   carried off as the panel ends. Its track sets where it stops: on a phone, above the sentence.
+ */
+
+.verb-panel{
+  position: relative;
+  height: 100svh;
+  isolation: isolate;
+}
+
+.verb-img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.verb-track{
+  position: absolute;
+  inset: 0 0 var(--verb-stop, 0) 0;
+  z-index: 1;
+}
+
+.verb-sticky{
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  font-size: clamp(7rem, 3rem + 20vw, 22rem);
+  line-height: 1;
+  top: calc(50svh - 0.5em);
+  margin-top: calc(50svh - 0.5em);
+}
+
+.verb{
+  font-size: 1em;
+  color: var(--ink-dark);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.verb-text{
+  position: absolute;
+  left: var(--margin);
+  bottom: 32px;
+  z-index: 1;
+  max-width: 34ch;
+  font-size: var(--step-lead);
+  line-height: 1.3;
+  color: var(--bone);
+  background: rgba(20, 14, 8, 0.66);
+  padding: 14px 18px;
+}
+
+/* Gallery: three venue photographs rising on a pinned stage */
+
+.gallery{
+  position: relative;
+  height: 200svh;
+  background: var(--deep);
+}
+
+.gallery-stage{
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gallery-head{
+  padding: 13svh var(--margin) 0;
+  text-align: center;
+  max-width: 760px;
+}
+
+.gallery-head h2{
+  font-size: var(--step-head);
+}
+
+.gallery-head p{
+  margin-top: 20px;
+  font-size: var(--step-body);
+}
+
+.triptych{
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+.tri{
+  object-fit: cover;
+  flex: none;
+}
+
+.tri-centre{
+  width: min(760px, 52vw);
+  aspect-ratio: 4 / 5;
+  transform-origin: top center;
+}
+
+.tri-left, .tri-right{
+  width: min(360px, 26vw);
+  aspect-ratio: 360 / 530;
+  margin-top: 55px;
+}
+
+/* Questions: practical facts and answers beside a venue photograph */
+
+.questions{
+  background: var(--surface);
+  color: var(--bone);
+  align-items: start;
+  padding-top: 0;
+}
+
+.questions-text{
+  grid-column: 1 / 6;
+  padding-top: var(--gap-section);
+}
+
+.questions h2{
+  font-size: var(--step-head);
+}
+
+.facts{
+  margin: 36px 0 0;
+  display: grid;
+  gap: 8px;
+  font-size: var(--step-body);
+}
+
+.facts div{
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.facts dt{
+  color: var(--muted);
+}
+
+.facts dd{
+  margin: 0;
+}
+
+.accordion{
+  margin-top: 48px;
+  display: grid;
+  gap: 28px;
+}
+
+.accordion summary{
+  list-style: none;
+  cursor: pointer;
+  font-size: var(--step-lead);
+  line-height: 1.25;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  align-items: baseline;
+  min-height: 44px;
+}
+
+.accordion summary::-webkit-details-marker{
+  display: none;
+}
+
+.accordion summary::after{
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-right: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-4px) rotate(45deg);
+  transition: transform 0.3s var(--ease);
+}
+
+.accordion details[open] summary::after{
+  transform: translateY(2px) rotate(-135deg);
+}
+
+.accordion summary:hover{
+  color: var(--field-1);
+}
+
+.accordion p{
+  margin-top: 10px;
+  color: var(--muted);
+  max-width: 52ch;
+}
+
+.questions-actions{
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+}
+
+.questions-pictures{
+  grid-column: 7 / 13;
+  position: relative;
+  margin-bottom: 80px;
+}
+
+.q-tall{
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.q-square{
+  position: absolute;
+  left: -40px;
+  bottom: -40px;
+  width: 34%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+/* Visit: a card on a full-bleed venue photograph */
+
+.visit{
+  position: relative;
+  min-height: 100svh;
+  background: var(--deep);
+}
+
+.visit-img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visit-card{
+  position: absolute;
+  top: 60px;
+  right: var(--margin);
+  width: 400px;
+  background: var(--bone);
+  color: var(--ink-dark);
+  border-radius: var(--radius);
+  padding: 32px;
+  overflow: hidden;
+}
+
+.visit-card h2{
+  font-size: clamp(2.5rem, 2rem + 1.5vw, 3.5rem);
+}
+
+.visit-card address{
+  font-style: normal;
+  margin-top: 16px;
+}
+
+.visit-rows{
+  margin: 20px 0 28px;
+  display: grid;
+  gap: 6px;
+}
+
+.visit-rows div{
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.visit-rows dt{
+  color: var(--muted-dark);
+}
+
+.visit-rows dd{
+  margin: 0;
+  text-align: right;
+}
+
+/* Footer: inverted, the name across the whole width */
+
+.footer{
+  position: sticky;
+  bottom: 0;
+  z-index: 0;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  background: var(--bone);
+  color: var(--ink-dark);
+  padding: 40px var(--margin) 20px;
+}
+
+.footer-cols{
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 32px 20px;
+  margin-top: 100px;
+  font-size: var(--step-body);
+  color: var(--muted-dark);
+}
+
+.footer-cols ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-cols a{
+  text-decoration: none;
+}
+
+.footer-cols a:hover{
+  text-decoration: underline;
+  color: var(--ink-dark);
+}
+
+.footer-first{
+  color: var(--ink-dark);
+}
+
+.footer-mark{
+  grid-row: 3;
+}
+
+.footer-mark svg{
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+.footer-mark text{
+  font-family: var(--display);
+  font-size: 200px;
+  fill: var(--ink-dark);
+}
+
+.footer-legal{
+  margin-top: 20px;
+  font-size: var(--step-small);
+  color: var(--muted-dark);
+  max-width: 75ch;
+}
+
+/* ---------- Phone and tablet ---------- */
+
+@media (max-width: 899px){
+  .hero{
+    height: 100svh;
+    min-height: 0;
+    padding: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .hero-panel{
+    height: 100%;
+    overflow: hidden;
+    border-radius: 0;
+  }
+
+  .hero-view{
+    position: absolute;
+    inset: 0;
+    height: auto;
+    min-height: 0;
+    overflow: hidden;
+    background: #dcdccb;
+  }
+
+  .hero-place{
+    top: 116px;
+    left: 16px;
+  }
+
+  .hero-title{
+    top: 136px;
+    padding: 0 16px;
+  }
+
+  .hero-title h1{
+    font-size: clamp(4.5rem, 24vw, 9rem);
+  }
+
+  .hero-lead{
+    margin-top: 24px;
+    font-size: var(--step-lead);
+  }
+
+  .chapter-bar{
+    height: 108px;
+    padding-top: 4px;
+    padding-bottom: 2px;
+    flex-wrap: nowrap;
+    align-content: center;
+    background-color: red;
+  }
+
+  .chapter-logo{
+    width: 46px;
+    height: 46px;
+  }
+
+  .chapter-brand{
+    gap: 7px;
+  }
+
+  .chapter-brand-name{
+    font-size: 1.3rem;
+  }
+
+  .chapter-links{
+    order: 0;
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 44px;
+    gap: clamp(8px, 1.5vw, 16px);
+    justify-content: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .chapter-links::-webkit-scrollbar{
+    display: none;
+  }
+
+  .chapter-links a{
+    flex: none;
+    padding-block: 0;
+    font-size: var(--step-small);
+    white-space: nowrap;
+  }
+
+  .chapter-cta{
+    font-size: var(--step-small);
+    white-space: nowrap;
+  }
+
+  .chapter{
+    grid-template-columns: 1fr;
+  }
+
+  .chapter > *{
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
+
+  .intro-text{
+    margin-top: 32px;
+  }
+
+  .intro-statement{
+    text-indent: 0;
+    font-size: var(--step-lead);
+  }
+
+  .intro-figure{
+    margin-top: 40px;
+    width: 62%;
+    justify-self: end;
+  }
+
+  .intro-figure img{
+    aspect-ratio: 4 / 5;
+  }
+
+  .intro-note{
+    margin-top: 20px;
+  }
+
+  .seasons-heading{
+    padding: 0 var(--margin);
+    margin-bottom: 32px;
+  }
+
+  .band{
+    flex-wrap: wrap;
+    height: 84svh;
+  }
+
+  .band-panel{
+    height: 50%;
+    flex: none !important;
+  }
+
+  .band-panel:nth-child(1), .band-panel:nth-child(4){
+    width: 64%;
+  }
+
+  .band-panel:nth-child(2), .band-panel:nth-child(3){
+    width: 36%;
+  }
+
+  .band-label{
+    left: 12px;
+    bottom: 12px;
+    white-space: normal;
+  }
+
+  .band-title{
+    left: 12px;
+    top: 12px;
+  }
+
+  .occasions-layout{
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .occasions-heading{
+    font-size: clamp(2.75rem, 12vw, 4rem);
+  }
+
+  .occasions-intro > p{
+    margin-top: 20px;
+  }
+
+  .occasions-figure{
+    width: 68%;
+    margin: 32px 0 0 auto;
+  }
+
+  .occasions-list{
+    gap: 28px;
+    padding-top: 0;
+  }
+
+  .occasion-group{
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .occasion-group h3{
+    color: #cfd2ae;
+  }
+
+  .occasion-group ul{
+    gap: 12px;
+  }
+
+  .occasion-group li{
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+  }
+
+  .occasion-when{
+    max-width: 13ch;
+  }
+
+  /* On a phone the sentence spans the width, so the verb stops above it. */
+
+  .verb-panel{
+    --verb-stop: 180px;
+  }
+
+  .verb-sticky{
+    font-size: 26vw;
+  }
+
+  .verb-text{
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    font-size: var(--step-body);
+  }
+
+  .gallery{
+    height: 170svh;
+  }
+
+  .tri-centre{
+    width: 84vw;
+  }
+
+  .tri-left, .tri-right{
+    width: 30vw;
+  }
+
+  .questions{
+    padding-top: var(--gap-section);
+  }
+
+  .questions-pictures{
+    order: -1;
+    margin-bottom: 64px;
+  }
+
+  .questions-text{
+    padding-top: 0;
+  }
+
+  .q-tall{
+    aspect-ratio: 4 / 5;
+  }
+
+  .q-square{
+    left: auto;
+    right: -8px;
+    bottom: -32px;
+    width: 38%;
+  }
+
+  .questions-actions .button{
+    width: 100%;
+  }
+
+  .visit{
+    min-height: 0;
+    padding-bottom: 32px;
+  }
+
+  .visit-img{
+    position: relative;
+    height: 70svh;
+  }
+
+  .visit-card{
+    position: relative;
+    top: auto;
+    right: auto;
+    width: auto;
+    margin: -80px 16px 0;
+  }
+
+  .footer-cols{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    font-size: var(--step-small);
+  }
+
+  .footer-mark text{
+    font-size: 200px;
+  }
+}
+
+@media (max-width: 599px){
+  .chapter-menu-toggle{
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  .chapter-menu-toggle span{
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.2s var(--ease), opacity 0.2s var(--ease);
+  }
+
+  .chapter-menu-toggle[aria-expanded='true'] span:nth-child(1){
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .chapter-menu-toggle[aria-expanded='true'] span:nth-child(2){
+    opacity: 0;
+  }
+
+  .chapter-menu-toggle[aria-expanded='true'] span:nth-child(3){
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .chapter-links{
+    display: none;
+  }
+
+  .chapter-links[data-open='true']{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    min-height: 0;
+    padding: 12px var(--margin) 18px;
+    overflow: visible;
+    background-color: inherit;
+  }
+
+  .chapter-bar[data-on='hero'] .chapter-links[data-open='true']{
+    background-color: var(--deep);
+  }
+
+  .chapter-links[data-open='true'] a{
+    min-height: 48px;
+    padding-block: 8px;
+    font-size: var(--step-body);
+  }
+
+  .chapter-links{
+    justify-content: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+
+  .gallery{
+    height: auto;
+  }
+
+  .gallery-stage{
+    position: relative;
+    height: auto;
+    padding-bottom: 80px;
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.log
+.vite/
+.taste-skill/
+# Full-size originals; the site serves the WebP copies in public/img (npm run images rebuilds them).
+assets/*.jpg
