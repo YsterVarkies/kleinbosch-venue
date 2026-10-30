@@ -11,6 +11,7 @@ export default function SplitText({ text, by = 'chars', className = '', stagger 
     const ctx = gsap.context(() => {
       gsap.from(ref.current.querySelectorAll('.split-part'), {
         yPercent: 105,
+        autoAlpha: 0,
         duration,
         ease: 'power4.out',
         stagger,

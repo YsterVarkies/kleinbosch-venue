@@ -60,11 +60,11 @@ export function riseIn(scope) {
     gsap.utils.toArray('[data-rise-group]', scope).forEach((group) => {
       const items = group.querySelectorAll('[data-rise]');
       gsap.from(items, {
-        y: 28,
+        y: 18,
         autoAlpha: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        stagger: 0.08,
+        duration: 0.85,
+        ease: 'power2.out',
+        stagger: 0.12,
         scrollTrigger: { trigger: group, start: 'top 82%', once: true }
       });
     });

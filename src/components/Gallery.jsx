@@ -21,11 +21,11 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section className="gallery" ref={ref} aria-labelledby="gallery-heading" data-ground="deep">
+    <section className="gallery" ref={ref} aria-labelledby="gallery-heading" data-ground="deep" data-rise-group>
       <div className="gallery-stage">
         <div className="gallery-head">
-          <h2 id="gallery-heading">From the grove to the table</h2>
-          <p>
+          <h2 id="gallery-heading" data-rise>From the grove to the table</h2>
+          <p data-rise>
             Hold your ceremony beneath the poplars, then gather inside for dinner beneath the timber trusses.
             Kleinbosch brings the grove and the hall into one celebration.
           </p>

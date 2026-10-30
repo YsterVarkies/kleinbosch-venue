@@ -4,15 +4,15 @@ import { scrollToHash } from '../lib/motion.js';
 
 export default function Footer() {
   return (
-    <footer className="footer" data-ground="bone">
+    <footer className="footer" data-ground="bone" data-rise-group>
       <div className="footer-cols">
-        <div>
+        <div data-rise>
           <p className="footer-first">Find us</p>
           <p>{site.name}</p>
           <p>{site.town}</p>
           <p>{site.region}</p>
         </div>
-        <div>
+        <div data-rise>
           <p className="footer-first">On this page</p>
           <ul>
             {chapters.map((c) => (
@@ -30,7 +30,7 @@ export default function Footer() {
             ))}
           </ul>
         </div>
-        <div>
+        <div data-rise>
           <p className="footer-first">Follow</p>
           <ul>
             <li><a href={site.socials.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
@@ -38,7 +38,7 @@ export default function Footer() {
             <li><a href={site.socials.google} target="_blank" rel="noopener noreferrer">Google</a></li>
           </ul>
         </div>
-        <div>
+        <div data-rise>
           <p className="footer-first">Visits</p>
           <p>{site.viewings}</p>
           <p>

@@ -14,7 +14,7 @@ export default function Visit({ month }) {
     : { href: site.socials.messenger, label: 'Or message us on Facebook', external: true };
 
   return (
-    <section className="visit" id="visit" data-ground="deep">
+    <section className="visit" id="visit" data-ground="deep" data-rise-group>
       <Img
         className="visit-img"
         name="venue-blue-table"
@@ -22,13 +22,13 @@ export default function Visit({ month }) {
         sizes="100vw"
       />
       <div className="visit-card">
-        <h2>Come and see</h2>
-        <address>
+        <h2 data-rise>Come and see</h2>
+        <address data-rise>
           {site.name}
           <br />
           {site.town}, {site.region}
         </address>
-        <dl className="visit-rows">
+        <dl className="visit-rows" data-rise>
           <div>
             <dt>Viewings</dt>
             <dd>{site.viewings}</dd>
@@ -60,7 +60,7 @@ export default function Visit({ month }) {
             </dd>
           </div>
         </dl>
-        <p className="visit-write">
+        <p className="visit-write" data-rise>
           <a
             className="text-link"
             href={write.href}
@@ -70,7 +70,7 @@ export default function Visit({ month }) {
             {write.label}
           </a>
         </p>
-        <a className="button button-wide" href={`tel:${site.tel}`}>
+        <a className="button button-wide" data-rise href={`tel:${site.tel}`}>
           Call about {article(name)} {name} date
         </a>
       </div>
