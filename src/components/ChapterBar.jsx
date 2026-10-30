@@ -75,18 +75,18 @@ export default function ChapterBar() {
             {chapter.label}
           </a>
         ))}
+        <a
+          className="chapter-cta"
+          href="#visit"
+          onClick={(e) => {
+            e.preventDefault();
+            setMenuOpen(false);
+            scrollToHash('#visit');
+          }}
+        >
+          Contact us
+        </a>
       </div>
-      <a
-        className="chapter-cta"
-        href="#visit"
-        onClick={(e) => {
-          e.preventDefault();
-          setMenuOpen(false);
-          scrollToHash('#visit');
-        }}
-      >
-        Contact us
-      </a>
     </nav>
   );
 }
