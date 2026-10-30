@@ -1039,25 +1039,23 @@ figure{
   }
 
   .chapter-bar{
-    height: 108px;
-    padding-top: 4px;
-    padding-bottom: 2px;
+    height: 72px;
+    padding-top: 0;
+    padding-bottom: 0;
     flex-wrap: nowrap;
-    align-content: center;
-    background-color: red;
   }
 
   .chapter-logo{
-    width: 46px;
-    height: 46px;
+    width: 40px;
+    height: 40px;
   }
 
   .chapter-brand{
-    gap: 7px;
+    gap: 6px;
   }
 
   .chapter-brand-name{
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .chapter-links{
