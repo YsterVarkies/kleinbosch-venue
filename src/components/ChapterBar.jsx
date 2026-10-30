@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { ScrollTrigger, scrollToHash } from '../lib/motion.js';
 import { site } from '../data/site.js';
 import { chapters } from './Hero.jsx';
@@ -9,8 +9,17 @@ export default function ChapterBar() {
   const [ground, setGround] = useState('hero');
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const chapters = [...document.querySelectorAll('.page [data-ground], .footer[data-ground]')].map((el) =>
+  useLayoutEffect(() => {
+    const sections = [...document.querySelectorAll('.page [data-ground], .footer[data-ground]')];
+    const syncGround = () => {
+      const current = sections.find((el) => {
+        const bounds = el.getBoundingClientRect();
+        return bounds.top <= 28 && bounds.bottom > 28;
+      });
+      if (current) setGround(current.dataset.ground);
+    };
+
+    const chapters = sections.map((el) =>
       ScrollTrigger.create({
         trigger: el,
         start: 'top 28px',
@@ -18,7 +27,10 @@ export default function ChapterBar() {
         onToggle: (self) => self.isActive && setGround(el.dataset.ground)
       })
     );
+    syncGround();
+    window.addEventListener('pageshow', syncGround);
     return () => {
+      window.removeEventListener('pageshow', syncGround);
       chapters.forEach((t) => t.kill());
     };
   }, []);
